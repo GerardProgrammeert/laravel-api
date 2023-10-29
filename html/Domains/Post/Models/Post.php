@@ -2,6 +2,7 @@
 
 namespace Domains\Post\Models;
 
+use Carbon\Carbon;
 use Domains\Category\Models\Category;
 use Domains\Comment\Enums\CommentableType;
 use Domains\Comment\Models\Comment;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property string                     $title
