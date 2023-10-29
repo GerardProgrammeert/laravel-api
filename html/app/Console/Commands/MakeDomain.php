@@ -31,9 +31,6 @@ class MakeDomain extends Command
 
         echo $domain;
 
-        \Str::replace();
-
-
         return Command::SUCCESS;
     }
 }
