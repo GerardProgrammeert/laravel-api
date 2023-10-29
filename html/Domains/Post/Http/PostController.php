@@ -7,6 +7,7 @@ use App\Http\Resources\PostResource;
 use Domains\Post\Http\Requests\PostCreateRequest;
 use Domains\Post\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
 
 class PostController extends Controller
 {
@@ -17,10 +18,13 @@ class PostController extends Controller
 
     public function store(PostCreateRequest $request): JsonResource
     {
-        $post = new Post($request->validated());
-        $post->save($request->validated());
+        $data = $request->validated();
+        $categoryIds =  data_get($data,['category_ids']);
+        Arr::forget($data, 'category_ids');
 
-
+        $post = new Post($data);
+        $post->save();
+        $post->categories()->attach($categoryIds);
 
         return new PostResource($post);
     }

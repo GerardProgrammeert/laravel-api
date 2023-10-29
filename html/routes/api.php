@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use Domains\Category\Http\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Domains\Post\Http\PostController;
 
@@ -21,11 +22,15 @@ use Domains\Post\Http\PostController;
 
 Route::get('/user', [UserController::class, 'index']);
 Route::post('/user', [UserController::class, 'store']);
+Route::middleware('auth:sanctum')->group( function () {
+    Route::resource('posts', PostController::class)
+        ->only(['index', 'store'])
+        ->except(['delete']);
 
-Route::resource('posts', PostController::class)
-    ->only(['index', 'store'])
-    ->except(['delete'])
-    ->middleware('auth:sanctum');
+
+    Route::resource('categories', CategoryController::class)
+        ->only('index', 'store');
+});
 
 Route::get('/health', function () {
     return 'hello';

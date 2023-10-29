@@ -11,6 +11,8 @@ class PostCreateRequest extends FormRequest
         return [
             'title' => 'string|required',
             'body' => 'string|required',
+            'category_ids' => 'array|required',
+            'category_ids.*' => 'string'
         ];
     }
 }

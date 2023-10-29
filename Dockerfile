@@ -1,5 +1,11 @@
+# start with the official Composer image and name it
+FROM composer:2.6.5 AS composer
+
 # Use the official PHP 8.2 image as the base image
 FROM php:8.2-fpm
+
+# copy the Composer PHAR from the Composer image into the PHP image
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -26,6 +32,8 @@ EXPOSE 9000
 
 # Start PHP-FPM
 CMD ["php-fpm"]
+
+RUN echo 'alias pa="php artisan"' >> ~/.bashrc
 
 # Optionally, you can add your application code by copying it into the container
 # COPY . /var/www

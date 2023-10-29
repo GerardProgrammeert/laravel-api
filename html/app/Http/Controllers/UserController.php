@@ -17,11 +17,10 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request): JsonResponse
     {
-       $request->validated();
-
-       $user = new User($request->all());
-        //user->save();
-        
+       $user = new User($request->validated());
        return response()->json($user->toArray(), 201);
     }
 }
+
+
+
