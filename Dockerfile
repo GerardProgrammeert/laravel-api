@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     unzip \
+    nano \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql zip
@@ -29,6 +30,13 @@ COPY . .
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
+
+# Create a user named "php" with a specific user ID and group ID
+#RUN groupadd -r php && useradd -r -g php php
+
+# Switch to the "php" user for subsequent instructions
+#USER php
+
 
 # Start PHP-FPM
 CMD ["php-fpm"]

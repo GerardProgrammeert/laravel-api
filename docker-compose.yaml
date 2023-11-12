@@ -12,6 +12,7 @@ services:
       - app-network
 
   php-fpm:
+    container_name: php-fpm
     build:
       context: .
       dockerfile: Dockerfile
