@@ -17,7 +17,7 @@ use Domains\Post\Http\PostController;
 */
 
 /**
- * TODO add extra middleware laag ???
+ * TODO add extra middleware laag1 ???
  */
 
 Route::get('/user', [UserController::class, 'index']);
